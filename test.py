@@ -1,4 +1,4 @@
-import pdb; pdb.set_trace()
+#import pdb; pdb.set_trace()
 
 import networkx as nx
 from networkx.algorithms.approximation.clique import max_clique

@@ -60,13 +60,13 @@ class Simulation:
             )
 
             current_state = evolution_operator @ current_state
-
-            eigenvalues = np.linalg.eigvalsh(hamiltonian_t.to_matrix())
-            sorted_eigenvalues = sorted(eigenvalues)
-            gap = min(np.diff(sorted_eigenvalues))
-            spectral_gaps.append(gap)
-
             simulation_data.append(current_state)
+
+            eigenvalues, eigenvectors = np.linalg.eig(hamiltonian_t.to_matrix())
+            eigenvalues = sorted(np.absolute(eigenvalues))
+            spectral_gap = (eigenvalues[1] - eigenvalues[0]).item()
+            spectral_gaps.append(spectral_gap)
+
 
         self.spectral_gaps = spectral_gaps
         self.simulation_results = simulation_data
