@@ -6,11 +6,9 @@ import numpy as np
 from qiskit.quantum_info import SparsePauliOp
 
 class MissingHamiltonianError(Exception):
-    """Raised when a required Hamiltonian is missing."""
     pass
 
 class NotExecutedError(Exception):
-    """Raised when results are requested before execution."""
     pass
 
 class Simulation:
@@ -62,9 +60,8 @@ class Simulation:
             current_state = evolution_operator @ current_state
             simulation_data.append(current_state)
 
-            eigenvalues, eigenvectors = np.linalg.eig(hamiltonian_t.to_matrix())
-            eigenvalues = sorted(np.absolute(eigenvalues))
-            spectral_gap = (eigenvalues[1] - eigenvalues[0]).item()
+            eigenvalues, eigenvectors = np.linalg.eigh(hamiltonian_t.to_matrix())
+            spectral_gap = (eigenvalues[1] - eigenvalues[0]).real
             spectral_gaps.append(spectral_gap)
 
 
